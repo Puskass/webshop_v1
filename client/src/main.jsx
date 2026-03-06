@@ -14,11 +14,12 @@ import AdminFeatures from "./pages/admin/features.jsx";
 import AdminOrders from "./pages/admin/orders.jsx";
 import AdminProducts from "./pages/admin/products.jsx";
 import ShoppingLayout from "./components/shopping/layout.jsx";
-import NotFound from "./pages/not-found/index.jsx";
 import ShoppingHome from "./pages/shopping/home.jsx";
 import ShoppingListing from "./pages/shopping/listing.jsx";
 import ShoppingAccount from "./pages/shopping/account.jsx";
 import ShoppingCheckout from "./pages/shopping/checkout.jsx";
+import NotFound from "./pages/not-found/index.jsx";
+import UnAuth from "./pages/unauth/unauth.jsx";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,14 @@ const router = createBrowserRouter([
           { path: "checkout", element: <ShoppingCheckout /> },
         ],
       },
+      {
+        path: "unauth-page",
+        element: <UnAuth />, 
+      },
+      {
+        path: "*", 
+        element: <NotFound />,
+      }
     ],
   },
 ]);
