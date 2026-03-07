@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import CheckAuth from "./components/common/check-auth";
 
 const App = () => {
-  const isAuthenticated = true;
+  const isAuthenticated = false;
   const user = {
     name: 'Tarik',
     role: 'admin'
