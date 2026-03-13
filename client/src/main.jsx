@@ -20,6 +20,7 @@ import ShoppingAccount from "./pages/shopping/account.jsx";
 import ShoppingCheckout from "./pages/shopping/checkout.jsx";
 import NotFound from "./pages/not-found/index.jsx";
 import UnAuth from "./pages/unauth/unauth.jsx";
+import { Toaster } from "@/components/ui/sonner.jsx";
 
 const router = createBrowserRouter([
   {
@@ -71,6 +72,7 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>
       <RouterProvider router={router} />
+      <Toaster />
     </Provider>
   </StrictMode>,
 );
