@@ -21,13 +21,15 @@ const AuthRegister = () => {
     event.preventDefault();
     dispatch(registerUser(formData)).then((data) => {
       if (data?.payload?.success) {
-        toast("Created User", {
-          description: "Monday, January 3rd at 6:00pm",
+        toast.success(data?.payload?.message, {
+          position: "top-center",
+        });
+        navigate("/auth/login");
+      } else {
+        toast.warning(data?.payload?.message, {
+          position: "top-center",
         });
       }
-
-      navigate("/auth/login");
-      console.log(data);
     });
   }
 

@@ -1,12 +1,10 @@
 import { Outlet } from "react-router-dom";
 import CheckAuth from "./components/common/check-auth";
+import { useSelector } from "react-redux";
 
 const App = () => {
-  const isAuthenticated = false;
-  const user = {
-    name: 'Tarik',
-    role: 'admin'
-  };
+
+  const {user, isAuthenticated} = useSelector(state => state.auth)
   return (
     <CheckAuth isAuthenticated={isAuthenticated} user={user}>
       <div className="flex flex-col overflow-hidden bg-white">
