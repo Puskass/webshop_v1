@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import {
@@ -51,37 +51,46 @@ const CommonForm = ({
             }
             value={value}
           >
-            <SelectTrigger>
-              <SelectValue placeholder={getControlItem.placeholder} />
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder={getControlItem.label} />
             </SelectTrigger>
-            <SelectContent>
-              {getControlItem.options &&
-                getControlItem.options.map((optionItem) => (
-                  <SelectItem key={optionItem.id}>
-                    {optionItem.label}
-                  </SelectItem>
-                ))}
+            <SelectContent className="bg-white border rounded-md shadow-lg">
+              {getControlItem.options && getControlItem.options.length > 0
+                ? getControlItem.options.map((optionItem, index) => (
+                    <Fragment key={optionItem.id}>
+                      <SelectItem
+                        value={optionItem.id}
+                        className="cursor-pointer py-2 px-3 focus:bg-gray-100 outline-none transition-colors"
+                      >
+                        {optionItem.label}
+                      </SelectItem>
+                      {index < getControlItem.options.length - 1 && (
+                        <div className="h-px bg-gray-200 my-1 mx-1" />
+                      )}
+                    </Fragment>
+                  ))
+                : null}
+              <div className="p-1"></div>
             </SelectContent>
           </Select>
         );
         break;
-      case "textarea":
-        element = (
-          <Textarea>
-            name={getControlItem.name}
-            placeholder={getControlItem.placeholder}
-            id={getControlItem.id}
-            value={value}
-            onChange=
-            {(e) =>
-              setFormData({
-                ...formData,
-                [getControlItem.name]: e.target.value,
-              })
-            }
-          </Textarea>
-        );
-        break;
+      // case "textarea":
+      //   element = (
+      //     <Textarea
+      //       name={getControlItem.name}
+      //       placeholder={getControlItem.placeholder}
+      //       id={getControlItem.id}
+      //       value={value}
+      //       onChange={(e) =>
+      //         setFormData({
+      //           ...formData,
+      //           [getControlItem.name]: e.target.value,
+      //         })
+      //       }
+      //     />
+      //   );
+      //   break;
       default:
         element = (
           <Input
