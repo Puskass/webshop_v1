@@ -20,9 +20,9 @@ const AuthLogin = () => {
 
     dispatch(loginUser(formData)).then((data) => {
       if (data?.payload?.success) {
-        toast(data?.payload?.message, { position: "top-center" });
+        toast.success(data?.payload?.message, { position: "top-center" });
       } else {
-        toast.warning(data?.payload?.message, { position: "top-center" })
+        toast.warning(data?.payload?.message, { position: "top-center" });
       }
     });
   }
