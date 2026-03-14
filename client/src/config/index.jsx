@@ -1,3 +1,5 @@
+import { BadgeCheck, LayoutDashboard, ShoppingBasket } from "lucide-react";
+
 export const registerFormControls = [
   {
     name: "userName",
@@ -5,7 +7,7 @@ export const registerFormControls = [
     placeholder: "Enter your user name",
     componentType: "input",
     type: "text",
-    options: []
+    options: [],
   },
   {
     name: "email",
@@ -37,5 +39,26 @@ export const loginFormControls = [
     placeholder: "Enter your password",
     componentType: "input",
     type: "password",
+  },
+];
+
+export const adminSidebarMenuItems = [
+  {
+    id: "dashboard",
+    label: "Dashboard",
+    path: "/admin/dashboard",
+    icon: <LayoutDashboard />,
+  },
+  {
+    id: "products",
+    label: "Products",
+    path: "/admin/products",
+    icon: <ShoppingBasket />,
+  },
+  {
+    id: "orders",
+    label: "Orders",
+    path: "/admin/orders",
+    icon: <BadgeCheck />,
   },
 ];

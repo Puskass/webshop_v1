@@ -1,5 +1,5 @@
 import CommonForm from "@/components/common/form";
-import { loginFormControls } from "@/config";
+import { loginFormControls } from "@/config/index";
 import { loginUser } from "@/store/auth-slice";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
