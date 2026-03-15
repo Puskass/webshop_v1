@@ -1,0 +1,17 @@
+$kind: http-request
+name: Upload Image
+method: POST
+url: "{{baseUrl}}/api/upload"
+body:
+  type: formdata
+  content:
+    - type: file
+      key: image
+      src:
+        - /C:/Users/cosov/OneDrive/Slike/133797067103183609.jpg
+      disabled: false
+    - type: text
+      key: ""
+      value: ""
+      description: ""
+      disabled: false

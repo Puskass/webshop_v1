@@ -1,0 +1,6 @@
+name: Webshop - Production
+values:
+  - key: baseUrl
+    value: 'https://your-production-url.com'
+    enabled: true
+    type: default

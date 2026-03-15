@@ -2,7 +2,10 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+const path = require("path"); 
 const authRouter = require("./routes/auth.routes");
+const uploadRouter = require("./routes/upload.routes")
+
 mongoose
   .connect(
     "mongodb+srv://tarikcosovic05:tarikcosovic05@cluster0.h850kbd.mongodb.net/",
@@ -31,5 +34,7 @@ app.use(
 app.use(cookieParser());
 app.use(express.json());
 app.use("/api/auth", authRouter);
+app.use("/api/admin/upload", uploadRouter);
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.listen(PORT, () => console.log(`Server is now running on port ${PORT}`));

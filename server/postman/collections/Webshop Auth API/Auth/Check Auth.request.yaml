@@ -1,0 +1,5 @@
+$kind: http-request
+name: Check Auth
+method: GET
+url: '{{baseUrl}}/api/auth/check-auth'
+order: 4000

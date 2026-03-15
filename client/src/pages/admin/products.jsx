@@ -30,6 +30,12 @@ const AdminProducts = () => {
 
   function onSubmit(e) {
     e.preventDefault();
+    const dataToSubmit = {
+    ...formData,
+    image: uploadedImageUrl
+  };
+
+  console.log("Podaci spremni za slanje:", dataToSubmit);
   }
   return (
     <Fragment>

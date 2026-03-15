@@ -17,8 +17,6 @@ const App = () => {
 
   if (isLoading) return <Skeleton className="w-150 h-150 bg-black" />;
 
-  console.log(isLoading, user);
-
   return (
     <CheckAuth isAuthenticated={isAuthenticated} user={user}>
       <div className="flex flex-col overflow-hidden bg-white">

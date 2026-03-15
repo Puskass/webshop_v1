@@ -3,6 +3,7 @@ import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import React, { useRef } from "react";
 import { Button } from "../ui/button";
+import axios from "axios";
 
 const ProductImageUpload = ({
   imageFile,
@@ -11,6 +12,30 @@ const ProductImageUpload = ({
   setUploadedImageFile,
 }) => {
   const inputRef = useRef(null);
+
+  async function uploadImageToBackend(imageFile) {
+    setImageLoadingState(true)
+    const formData = new FormData();
+    formData.append("image", imageFile);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/admin/upload",
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        },
+      );
+      console.log(response);
+      
+      if (response?.data?.success) {
+        setUploadedImageFile(response.data.url);
+        console.log("Slika uspešno sačuvana na:", response.data.url);
+      }
+    } catch (error) {
+      console.log("Failed to upload: ", error);
+    }
+  }
 
   function handleImageFileChange(e) {
     console.log(e.target.files);
@@ -34,7 +59,7 @@ const ProductImageUpload = ({
       inputRef.current.value = "";
     }
   }
-  console.log(imageFile);
+  // console.log(imageFile);
 
   return (
     <div className="w-full max-w-md mx-auto px-4 py-6 mt-4">
@@ -48,6 +73,7 @@ const ProductImageUpload = ({
           id="image-upload"
           type="file"
           className="hidden"
+          name="image"
           ref={inputRef}
           onChange={handleImageFileChange}
         />
@@ -77,6 +103,18 @@ const ProductImageUpload = ({
           </div>
         )}
       </div>
+      {uploadedImageFile && (
+        <div className="mt-4 relative group">
+          <img
+            src={uploadedImageFile}
+            alt="Uploaded"
+            className="w-full h-48 object-cover rounded-lg border"
+          />
+          <div className="absolute top-2 right-2 bg-green-500 text-white text-xs px-2 py-1 rounded shadow-lg">
+            Server Uploaded ✅
+          </div>
+        </div>
+      )}
     </div>
   );
 };
