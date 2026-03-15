@@ -1,42 +1,46 @@
 import { FileIcon, UploadCloudIcon, XIcon } from "lucide-react";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Button } from "../ui/button";
 import axios from "axios";
 
 const ProductImageUpload = ({
   imageFile,
   setImageFile,
-  uploadedImageFile,
-  setUploadedImageFile,
+  uploadedImageUrl,
+  setUploadedImageUrl,
 }) => {
   const inputRef = useRef(null);
 
-  async function uploadImageToBackend(imageFile) {
-    setImageLoadingState(true)
+  async function uploadImageToBackend() {
+    // setImageLoadingState(true);
     const formData = new FormData();
     formData.append("image", imageFile);
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/admin/upload",
+        "http://localhost:5000/api/admin/products/upload",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
         },
       );
       console.log(response);
-      
+
       if (response?.data?.success) {
-        setUploadedImageFile(response.data.url);
-        console.log("Slika uspešno sačuvana na:", response.data.url);
+        setUploadedImageUrl(response.data.data.path);
+        console.log("Slika uspešno sačuvana na:", response.data.data.path);
       }
     } catch (error) {
       console.log("Failed to upload: ", error);
     }
   }
-
+  useEffect(() => {
+    if (imageFile !== null) {
+      uploadImageToBackend();
+    }
+  }, [imageFile]);
   function handleImageFileChange(e) {
     console.log(e.target.files);
     const selectedFile = e.target.files?.[0];
@@ -103,10 +107,10 @@ const ProductImageUpload = ({
           </div>
         )}
       </div>
-      {uploadedImageFile && (
+      {uploadedImageUrl && (
         <div className="mt-4 relative group">
           <img
-            src={uploadedImageFile}
+            src={uploadedImageUrl}
             alt="Uploaded"
             className="w-full h-48 object-cover rounded-lg border"
           />

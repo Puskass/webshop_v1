@@ -1,7 +1,7 @@
 $kind: http-request
 name: Upload Image
 method: POST
-url: "{{baseUrl}}/api/upload"
+url: "{{baseUrl}}/api/admin/products/upload"
 body:
   type: formdata
   content:
@@ -9,9 +9,4 @@ body:
       key: image
       src:
         - /C:/Users/cosov/OneDrive/Slike/133797067103183609.jpg
-      disabled: false
-    - type: text
-      key: ""
-      value: ""
-      description: ""
       disabled: false

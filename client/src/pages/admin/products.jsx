@@ -8,7 +8,9 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { addProductFormElements } from "@/config";
-import React, { Fragment, useState } from "react";
+import { addNewProduct, fetchAllProducts } from "@/store/admin/products-slice";
+import React, { Fragment, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const initialFormData = {
   image: null,
@@ -27,16 +29,26 @@ const AdminProducts = () => {
   const [formData, setFormData] = useState(initialFormData);
   const [imageFile, setImageFile] = useState(null);
   const [uploadedImageUrl, setUploadedImageUrl] = useState("");
+  const { productList } = useSelector((state) => state.adminProducts);
+  const dispatch = useDispatch();
 
   function onSubmit(e) {
     e.preventDefault();
-    const dataToSubmit = {
-    ...formData,
-    image: uploadedImageUrl
-  };
-
-  console.log("Podaci spremni za slanje:", dataToSubmit);
+    dispatch(
+      addNewProduct({
+        ...formData,
+        image: uploadedImageUrl,
+      }),
+    ).then((data) => {
+      console.log(data);
+    });
   }
+
+  useEffect(() => {
+    dispatch(fetchAllProducts());
+  }, [dispatch]);
+
+  console.log(productList, uploadedImageUrl, "productList");
   return (
     <Fragment>
       <div className="mb-5 flex justify-end">

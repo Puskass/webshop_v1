@@ -34,7 +34,7 @@ app.use(
 app.use(cookieParser());
 app.use(express.json());
 app.use("/api/auth", authRouter);
-app.use("/api/admin/upload", uploadRouter);
+app.use("/api/admin/products", uploadRouter);
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.listen(PORT, () => console.log(`Server is now running on port ${PORT}`));
