@@ -57,6 +57,7 @@ export const deleteProduct = createAsyncThunk(
     return result?.data;
   },
 );
+
 const AdminProductsSlice = createSlice({
   name: "adminProducts",
   initialState,
@@ -79,4 +80,4 @@ const AdminProductsSlice = createSlice({
   },
 });
 
-export default AdminProductsSlice.reducer
+export default AdminProductsSlice.reducer;

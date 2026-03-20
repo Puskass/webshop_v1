@@ -10,7 +10,7 @@ const {
 
 router.post("/upload", uploadImage);
 router.post("/add", addProduct);
-router.put("edit/:id", editProduct);
+router.put("/edit/:id", editProduct);
 router.delete("/delete/:id", deleteProduct);
 router.get("/get", fetchAllProducts);
 

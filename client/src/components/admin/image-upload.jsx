@@ -10,6 +10,7 @@ const ProductImageUpload = ({
   setImageFile,
   uploadedImageUrl,
   setUploadedImageUrl,
+  isEditMode,
 }) => {
   const inputRef = useRef(null);
 
@@ -63,7 +64,6 @@ const ProductImageUpload = ({
       inputRef.current.value = "";
     }
   }
-  // console.log(imageFile);
 
   return (
     <div className="w-full max-w-md mx-auto px-4 py-6 mt-4">
@@ -71,7 +71,7 @@ const ProductImageUpload = ({
       <div
         onDragOver={handleDragOver}
         onDrop={handleDrop}
-        className="border-2 border-dashed rounded-lg p-4"
+        className={`${isEditMode ? "opacity-60" : ""} border-2 border-dashed rounded-lg p-4`}
       >
         <Input
           id="image-upload"
@@ -80,11 +80,12 @@ const ProductImageUpload = ({
           name="image"
           ref={inputRef}
           onChange={handleImageFileChange}
+          disabled={isEditMode}
         />
         {!imageFile ? (
           <Label
             htmlFor="image-upload"
-            className="flex flex-col items-center justify-center h-32 cursor-pointer"
+            className={`${isEditMode ? "cursor-not-allowed" : ""} flex flex-col items-center justify-center h-32 cursor-pointer`}
           >
             <UploadCloudIcon className="w-10 h-10 text-muted-foreground mb-2" />
             <span>Drag & drop or click to upload image</span>
@@ -107,7 +108,8 @@ const ProductImageUpload = ({
           </div>
         )}
       </div>
-      {uploadedImageUrl && (
+      {/* 
+     {uploadedImageUrl && (
         <div className="mt-4 relative group">
           <img
             src={uploadedImageUrl}
@@ -118,7 +120,8 @@ const ProductImageUpload = ({
             Server Uploaded ✅
           </div>
         </div>
-      )}
+      )} 
+      */}
     </div>
   );
 };
